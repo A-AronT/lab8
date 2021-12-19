@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import L, { LeafletMouseEvent } from 'leaflet';
+import React, { useEffect, useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import './App.css';
+import 'leaflet/dist/leaflet.css';
+
 const apiKey: string | undefined = process.env.REACT_APP_API_KEY
 
 console.log(apiKey);
@@ -42,8 +46,50 @@ function App() {
   }
   console.log(weatherData)
 
+  // useEffect(() => {
+
+
+
+  //   let current_lat = 28.625789;
+  //   let current_long = 77.0547899;
+  //   let current_zoom = 16;
+  //   let center_lat = current_lat;
+  //   let center_long = current_long;
+  //   let center_zoom = current_zoom;
+
+
+
+
+  //   // The <div id="map"> must be added to the dom before calling L.map('map')
+  //   let map = L.map('map', {
+  //     center: [center_lat, center_long],
+  //     zoom: center_zoom
+  //   });
+
+  //   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  //     attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  //   }).addTo(map);
+
+
+
+  // });
+
   return (
-    <div><p>hello sirs</p>
+    <div>
+      <div id='map'>
+        <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={[51.505, -0.09]}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+        </MapContainer>
+      </div>
+      <p>hello sirs</p>
       <button onClick={getLocation}>get location</button>
       <button onClick={getWeather}>show location weather</button>
       <table>
